@@ -2,8 +2,10 @@ import React from "react";
 import appStore from "../assets/app-store.svg";
 import playStore from "../assets/play-store.svg";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
+  const navigate = useNavigate();
   return (
     <section className="py-12 px-4 md:py-20 bg-gray-50">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -42,6 +44,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
+              onClick={() => {
+                navigate("/teacher");
+              }}
             >
               Book Free Session
             </motion.a>

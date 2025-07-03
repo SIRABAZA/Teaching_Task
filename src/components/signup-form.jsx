@@ -4,13 +4,50 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import signUpImage from "../assets/signUP.svg";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+  name: Yup.string().required("Name is required"),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Confirm your password"),
+});
 
 export default function SignUpForm() {
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema,
+    onSubmit: (values, { setSubmitting, resetForm }) => {
+      // Simulate API call
+      setTimeout(() => {
+        alert("Signed up successfully!\n" + JSON.stringify(values, null, 2));
+        setSubmitting(false);
+        resetForm();
+      }, 1000);
+    },
+  });
+
   return (
     <div className="flex flex-col gap-6">
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8">
+          <form
+            className="p-6 md:p-8"
+            onSubmit={formik.handleSubmit}
+            noValidate
+          >
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">Create your account</h1>
@@ -20,27 +57,90 @@ export default function SignUpForm() {
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="name">Name</Label>
-                <Input id="name" type="text" placeholder="Your Name" required />
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Your Name"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.name}
+                  required
+                  aria-invalid={formik.touched.name && !!formik.errors.name}
+                />
+                {formik.touched.name && formik.errors.name && (
+                  <div className="text-red-500 text-xs mt-1">
+                    {formik.errors.name}
+                  </div>
+                )}
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="m@example.com"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
                   required
+                  aria-invalid={formik.touched.email && !!formik.errors.email}
                 />
+                {formik.touched.email && formik.errors.email && (
+                  <div className="text-red-500 text-xs mt-1">
+                    {formik.errors.email}
+                  </div>
+                )}
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" required />
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                  required
+                  aria-invalid={
+                    formik.touched.password && !!formik.errors.password
+                  }
+                />
+                {formik.touched.password && formik.errors.password && (
+                  <div className="text-red-500 text-xs mt-1">
+                    {formik.errors.password}
+                  </div>
+                )}
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="confirmPassword">Confirm Password</Label>
-                <Input id="confirmPassword" type="password" required />
+                <Input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.confirmPassword}
+                  required
+                  aria-invalid={
+                    formik.touched.confirmPassword &&
+                    !!formik.errors.confirmPassword
+                  }
+                />
+                {formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword && (
+                    <div className="text-red-500 text-xs mt-1">
+                      {formik.errors.confirmPassword}
+                    </div>
+                  )}
               </div>
-              <Button type="submit" className="w-full">
-                Sign Up
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={formik.isSubmitting || !formik.isValid}
+              >
+                {formik.isSubmitting ? "Signing Up..." : "Sign Up"}
               </Button>
               <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                 <span className="bg-card text-muted-foreground relative z-10 px-2">
