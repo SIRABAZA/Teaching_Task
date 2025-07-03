@@ -22,7 +22,7 @@ const validationSchema = Yup.object({
     .max(500, "Message must be at most 500 characters"),
 });
 
-export default function Modal({ isOpen, onClose, onSubmit }) {
+export default function Modal({ isOpen, onClose, onBookLesson }) {
   if (!isOpen) return null;
 
   return (
@@ -47,7 +47,7 @@ export default function Modal({ isOpen, onClose, onSubmit }) {
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
-            onSubmit(values);
+            onBookLesson(values);
             setSubmitting(false);
             resetForm();
             onClose();
@@ -56,12 +56,7 @@ export default function Modal({ isOpen, onClose, onSubmit }) {
           {({ isSubmitting, setFieldValue, values }) => (
             <Form className="space-y-4">
               <div>
-                <Label
-                  htmlFor="studentName"
-                  className="block text-sm font-medium mb-1"
-                >
-                  Student Name
-                </Label>
+                <Label htmlFor="studentName">Student Name</Label>
                 <Field
                   as={Input}
                   type="text"
@@ -94,12 +89,7 @@ export default function Modal({ isOpen, onClose, onSubmit }) {
                 />
               </div>
               <div>
-                <Label
-                  htmlFor="message"
-                  className="block text-sm font-medium mb-1"
-                >
-                  Short Message
-                </Label>
+                <Label htmlFor="message">Short Message</Label>
                 <Field
                   as={Textarea}
                   name="message"
@@ -114,7 +104,7 @@ export default function Modal({ isOpen, onClose, onSubmit }) {
                 />
               </div>
               <div className="text-center">
-                <Button className="" type="submit" disabled={isSubmitting}>
+                <Button type="submit" disabled={isSubmitting}>
                   Send Request
                 </Button>
               </div>

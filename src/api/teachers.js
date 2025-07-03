@@ -7,12 +7,19 @@ export async function getAllTeachers() {
   return response.data;
 }
 
-export async function getTeacherById(id) {
-  const response = await axios.get(`${BASE_URL}/${id}`);
-  return response.data;
+export async function getAppointmentsByTeacherId(teacherId) {
+  const response = await axios.get(`${BASE_URL}/${teacherId}`);
+  return response.data.appointments || [];
 }
 
-export async function createTeacher(teacher) {
-  const response = await axios.post(BASE_URL, teacher);
-  return response.data;
+export async function bookLesson(teacherId, appointment) {
+  const response = await axios.get(`${BASE_URL}/${teacherId}`);
+  const updatedAppointments = [
+    ...(response.data.appointments || []),
+    appointment,
+  ];
+  const patchResponse = await axios.patch(`${BASE_URL}/${teacherId}`, {
+    appointments: updatedAppointments,
+  });
+  return patchResponse.data;
 }

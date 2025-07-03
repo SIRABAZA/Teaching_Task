@@ -5,6 +5,8 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Teacher from "./pages/Teacher";
+import Dashboard from "./pages/Dashboard";
+import { AdminLogin } from "./pages/AdminLogin";
 
 // Lazy load the pages
 const RootLayout = lazy(() => import("./Layout/MainLayout"));
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "/admin",
+        element: <AdminLogin />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
       },
     ],
   },

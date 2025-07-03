@@ -55,7 +55,9 @@ export default function TeacherCard({
       {/* Action Buttons */}
       <div className="flex flex-col gap-2">
         <button
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full transition"
+          className={`cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full transition ${
+            !availability && "pointer-events-none bg-gray-500"
+          }`}
           onClick={() =>
             onRequestLesson &&
             onRequestLesson({
@@ -69,6 +71,7 @@ export default function TeacherCard({
               location,
             })
           }
+          disabled={!availability}
         >
           Request a Lesson
         </button>

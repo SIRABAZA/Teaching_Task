@@ -1,26 +1,33 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllTeachers, getTeacherById, createTeacher } from "@/api/teachers";
+import {
+  getAllTeachers,
+  getAppointmentsByTeacherId,
+  bookLesson,
+} from "@/api/teachers";
 
 export const fetchTeachers = createAsyncThunk("teachers/fetchAll", async () => {
   return await getAllTeachers();
 });
 
-export const fetchTeacherById = createAsyncThunk(
-  "teachers/fetchById",
-  async (id) => {
-    return await getTeacherById(id);
+export const fetchAppointmentsByTeacherId = createAsyncThunk(
+  "teachers/fetchAppointmentsByTeacherId",
+  async (teacherId) => {
+    return await getAppointmentsByTeacherId(teacherId);
   }
 );
 
-export const addTeacher = createAsyncThunk("teachers/add", async (teacher) => {
-  return await createTeacher(teacher);
-});
+export const bookLessonThunk = createAsyncThunk(
+  "teachers/bookLesson",
+  async ({ teacherId, appointment }) => {
+    return await bookLesson(teacherId, appointment);
+  }
+);
 
 const teachersSlice = createSlice({
   name: "teachers",
   initialState: {
     list: [],
-    selected: null,
+    appointments: [],
     loading: false,
     error: null,
   },
@@ -40,29 +47,38 @@ const teachersSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
-      // Fetch teacher by id
-      .addCase(fetchTeacherById.pending, (state) => {
+      // Fetch appointments by teacher id
+      .addCase(fetchAppointmentsByTeacherId.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchTeacherById.fulfilled, (state, action) => {
+      .addCase(fetchAppointmentsByTeacherId.fulfilled, (state, action) => {
         state.loading = false;
-        state.selected = action.payload;
+        state.appointments = action.payload;
       })
-      .addCase(fetchTeacherById.rejected, (state, action) => {
+      .addCase(fetchAppointmentsByTeacherId.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
-      // Add teacher
-      .addCase(addTeacher.pending, (state) => {
+      // Book lesson (add appointment)
+      .addCase(bookLessonThunk.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(addTeacher.fulfilled, (state, action) => {
+      .addCase(bookLessonThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.list.push(action.payload);
+        // Update the teacher in the list
+        const updatedTeacher = action.payload;
+        const idx = state.list.findIndex((t) => t.id === updatedTeacher.id);
+        if (idx !== -1) {
+          state.list[idx] = updatedTeacher;
+        }
+        // Optionally update appointments if relevant
+        if (state.appointments && updatedTeacher.appointments) {
+          state.appointments = updatedTeacher.appointments;
+        }
       })
-      .addCase(addTeacher.rejected, (state, action) => {
+      .addCase(bookLessonThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
