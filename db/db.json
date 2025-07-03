@@ -1,0 +1,243 @@
+{
+  "teachers": [
+    {
+      "id": 1,
+      "avatar": "https://placehold.co/200x200/ffe4e6/cccccc?text=Teacher",
+      "name": "Mr. John Smith",
+      "subject": "Mathematics",
+      "years_of_experience": "7",
+      "availability": false,
+      "average_rating": "4.5",
+      "location": "USA",
+      "appointments": [
+        {
+          "id": 1,
+          "studentName": "Omar",
+          "date": "7/14/2024",
+          "time": "12:00 PM",
+          "message": "ascascascacASCA"
+        },
+        {
+          "id": 2,
+          "studentName": "Lina",
+          "date": "7/15/2024",
+          "time": "10:30 AM",
+          "message": "Need help with algebra."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "avatar": "https://placehold.co/200x200/dbeafe/cccccc?text=Teacher",
+      "name": "Ms. Sara Lee",
+      "subject": "English Literature",
+      "years_of_experience": "5",
+      "availability": true,
+      "average_rating": "4.9",
+      "location": "UK",
+      "appointments": [
+        {
+          "id": 1,
+          "studentName": "Ahmed",
+          "date": "7/16/2024",
+          "time": "2:00 PM",
+          "message": "Essay review session."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "avatar": "https://placehold.co/200x200/fde68a/cccccc?text=Teacher",
+      "name": "Dr. Omar Khaled",
+      "subject": "Physics",
+      "years_of_experience": "12",
+      "availability": true,
+      "average_rating": "4.7",
+      "location": "Egypt",
+      "appointments": [
+        {
+          "id": 1,
+          "studentName": "Fatima",
+          "date": "7/18/2024",
+          "time": "9:00 AM",
+          "message": "Quantum mechanics intro."
+        },
+        {
+          "id": 2,
+          "studentName": "Youssef",
+          "date": "7/19/2024",
+          "time": "11:00 AM",
+          "message": "Exam preparation."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "avatar": "https://placehold.co/200x200/e2e8f0/cccccc?text=Teacher",
+      "name": "Dr. Amira Ahmed",
+      "subject": "Child Psychology",
+      "years_of_experience": "10",
+      "availability": true,
+      "average_rating": "4.8",
+      "location": "Egypt",
+      "appointments": [
+        {
+          "id": 1,
+          "studentName": "Mona",
+          "date": "7/20/2024",
+          "time": "3:00 PM",
+          "message": "Behavioral assessment."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "avatar": "https://placehold.co/200x200/ffedd5/cccccc?text=Teacher",
+      "name": "Mr. David Kim",
+      "subject": "Chemistry",
+      "years_of_experience": "8",
+      "availability": false,
+      "average_rating": "4.3",
+      "location": "South Korea",
+      "appointments": [
+        {
+          "id": 1,
+          "studentName": "Jin",
+          "date": "7/21/2024",
+          "time": "1:00 PM",
+          "message": "Organic chemistry help."
+        },
+        {
+          "id": 2,
+          "studentName": "Sara",
+          "date": "7/22/2024",
+          "time": "4:00 PM",
+          "message": "Lab report review."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "avatar": "https://placehold.co/200x200/bae6fd/cccccc?text=Teacher",
+      "name": "Ms. Emily Zhang",
+      "subject": "Biology",
+      "years_of_experience": "6",
+      "availability": true,
+      "average_rating": "4.6",
+      "location": "China",
+      "appointments": [
+        {
+          "id": 1,
+          "studentName": "Ali",
+          "date": "7/23/2024",
+          "time": "10:00 AM",
+          "message": "Genetics Q&A."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "avatar": "https://placehold.co/200x200/ddd6fe/cccccc?text=Teacher",
+      "name": "Mr. Lucas Brown",
+      "subject": "History",
+      "years_of_experience": "9",
+      "availability": false,
+      "average_rating": "4.2",
+      "location": "Canada",
+      "appointments": [
+        {
+          "id": 1,
+          "studentName": "Noor",
+          "date": "7/24/2024",
+          "time": "5:00 PM",
+          "message": "World War II discussion."
+        },
+        {
+          "id": 2,
+          "studentName": "Sam",
+          "date": "7/25/2024",
+          "time": "6:00 PM",
+          "message": "Essay planning."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "avatar": "https://placehold.co/200x200/fca5a5/cccccc?text=Teacher",
+      "name": "Ms. Isabella Rossi",
+      "subject": "Italian",
+      "years_of_experience": "4",
+      "availability": true,
+      "average_rating": "4.4",
+      "location": "Italy",
+      "appointments": [
+        {
+          "id": 1,
+          "studentName": "Marco",
+          "date": "7/26/2024",
+          "time": "8:00 AM",
+          "message": "Conversational practice."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "avatar": "https://placehold.co/200x200/fee2e2/cccccc?text=Teacher",
+      "name": "Dr. Sophia Müller",
+      "subject": "German",
+      "years_of_experience": "11",
+      "availability": false,
+      "average_rating": "4.1",
+      "location": "Germany",
+      "appointments": [
+        {
+          "id": 1,
+          "studentName": "Anna",
+          "date": "7/27/2024",
+          "time": "9:30 AM",
+          "message": "Grammar review."
+        },
+        {
+          "id": 2,
+          "studentName": "Paul",
+          "date": "7/28/2024",
+          "time": "2:30 PM",
+          "message": "Exam prep."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "avatar": "https://placehold.co/200x200/cae9ff/cccccc?text=Teacher",
+      "name": "Mr. Jean Dupont",
+      "subject": "French",
+      "years_of_experience": "13",
+      "availability": true,
+      "average_rating": "4.9",
+      "location": "France",
+      "appointments": [
+        {
+          "id": 1,
+          "studentName": "Claire",
+          "date": "7/29/2024",
+          "time": "11:00 AM",
+          "message": "Pronunciation session."
+        },
+        {
+          "id": 2,
+          "studentName": "Louis",
+          "date": "7/30/2024",
+          "time": "3:00 PM",
+          "message": "Vocabulary building."
+        },
+        {
+          "id": 3,
+          "studentName": "Sophie",
+          "date": "7/31/2024",
+          "time": "1:00 PM",
+          "message": "Conversational French."
+        }
+      ]
+    }
+  ]
+}

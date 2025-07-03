@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import TeacherCard from "@/components/TeacherCard";
 import Modal from "@/components/Modal";
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
 
 const teachersData = [
   {
@@ -51,9 +58,9 @@ const uniqueLocations = [...new Set(teachersData.map((t) => t.location))];
 
 export default function Teacher() {
   const [filters, setFilters] = useState({
-    subject: "",
-    location: "",
-    availability: "",
+    subject: "all",
+    location: "all",
+    availability: "all",
   });
   const [showFilters, setShowFilters] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -61,10 +68,15 @@ export default function Teacher() {
 
   const filteredTeachers = teachersData.filter((teacher) => {
     const subjectMatch =
-      !filters.subject || teacher.subject === filters.subject;
+      filters.subject === "all" ||
+      !filters.subject ||
+      teacher.subject === filters.subject;
     const locationMatch =
-      !filters.location || teacher.location === filters.location;
+      filters.location === "all" ||
+      !filters.location ||
+      teacher.location === filters.location;
     const availabilityMatch =
+      filters.availability === "all" ||
       !filters.availability ||
       (filters.availability === "available" && teacher.availability) ||
       (filters.availability === "unavailable" && !teacher.availability);
@@ -131,45 +143,57 @@ export default function Teacher() {
             } md:max-h-full md:opacity-100
           `}
         >
-          <select
-            className="w-full sm:w-auto mb-2 sm:mb-0 px-3 py-2 rounded border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          <Select
             value={filters.subject}
-            onChange={(e) =>
-              setFilters((f) => ({ ...f, subject: e.target.value }))
+            onValueChange={(value) =>
+              setFilters((f) => ({ ...f, subject: value }))
             }
           >
-            <option value="">All Subjects</option>
-            {uniqueSubjects.map((subject) => (
-              <option key={subject} value={subject}>
-                {subject}
-              </option>
-            ))}
-          </select>
-          <select
-            className="w-full sm:w-auto mb-2 sm:mb-0 px-3 py-2 rounded border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            <SelectTrigger className="w-full sm:w-auto mb-2 sm:mb-0">
+              <SelectValue placeholder="All Subjects" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Subjects</SelectItem>
+              {uniqueSubjects.map((subject) => (
+                <SelectItem key={subject} value={subject}>
+                  {subject}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select
             value={filters.location}
-            onChange={(e) =>
-              setFilters((f) => ({ ...f, location: e.target.value }))
+            onValueChange={(value) =>
+              setFilters((f) => ({ ...f, location: value }))
             }
           >
-            <option value="">All Locations</option>
-            {uniqueLocations.map((location) => (
-              <option key={location} value={location}>
-                {location}
-              </option>
-            ))}
-          </select>
-          <select
-            className="w-full sm:w-auto px-3 py-2 rounded border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            <SelectTrigger className="w-full sm:w-auto mb-2 sm:mb-0">
+              <SelectValue placeholder="All Locations" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Locations</SelectItem>
+              {uniqueLocations.map((location) => (
+                <SelectItem key={location} value={location}>
+                  {location}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select
             value={filters.availability}
-            onChange={(e) =>
-              setFilters((f) => ({ ...f, availability: e.target.value }))
+            onValueChange={(value) =>
+              setFilters((f) => ({ ...f, availability: value }))
             }
           >
-            <option value="">All</option>
-            <option value="available">Available</option>
-            <option value="unavailable">Unavailable</option>
-          </select>
+            <SelectTrigger className="w-full sm:w-auto">
+              <SelectValue placeholder="All" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All</SelectItem>
+              <SelectItem value="available">Available</SelectItem>
+              <SelectItem value="unavailable">Unavailable</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
         {/* Teacher Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">

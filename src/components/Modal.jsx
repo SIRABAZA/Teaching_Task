@@ -1,12 +1,32 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Calendar24 } from "@/components/DataTimePicker";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import * as Yup from "yup";
+import { Button } from "./ui/button";
+
+const validationSchema = Yup.object({
+  studentName: Yup.string().required("Student name is required"),
+  preferredDate: Yup.mixed()
+    .test(
+      "is-date",
+      "Date is required",
+      (value) => value instanceof Date && !isNaN(value)
+    )
+    .required("Date is required"),
+  preferredTime: Yup.string().required("Time is required"),
+  message: Yup.string()
+    .required("Message is required")
+    .max(500, "Message must be at most 500 characters"),
+});
 
 export default function Modal({ isOpen, onClose, onSubmit }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/90 bg-opacity-40">
       <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative animate-fadeIn">
         <button
           className="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl font-bold"
@@ -25,14 +45,7 @@ export default function Modal({ isOpen, onClose, onSubmit }) {
             preferredTime: "10:30:00",
             message: "",
           }}
-          validate={(values) => {
-            const errors = {};
-            if (!values.studentName) errors.studentName = "Required";
-            if (!values.preferredDate) errors.preferredDate = "Required";
-            if (!values.preferredTime) errors.preferredTime = "Required";
-            if (!values.message) errors.message = "Required";
-            return errors;
-          }}
+          validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
             onSubmit(values);
             setSubmitting(false);
@@ -43,13 +56,18 @@ export default function Modal({ isOpen, onClose, onSubmit }) {
           {({ isSubmitting, setFieldValue, values }) => (
             <Form className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <Label
+                  htmlFor="studentName"
+                  className="block text-sm font-medium mb-1"
+                >
                   Student Name
-                </label>
+                </Label>
                 <Field
+                  as={Input}
                   type="text"
                   name="studentName"
-                  className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
+                  id="studentName"
+                  className="w-full"
                 />
                 <ErrorMessage
                   name="studentName"
@@ -76,14 +94,18 @@ export default function Modal({ isOpen, onClose, onSubmit }) {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <Label
+                  htmlFor="message"
+                  className="block text-sm font-medium mb-1"
+                >
                   Short Message
-                </label>
+                </Label>
                 <Field
-                  as="textarea"
+                  as={Textarea}
                   name="message"
+                  id="message"
+                  className="w-full"
                   rows={3}
-                  className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
                 />
                 <ErrorMessage
                   name="message"
@@ -91,13 +113,11 @@ export default function Modal({ isOpen, onClose, onSubmit }) {
                   className="text-red-500 text-xs mt-1"
                 />
               </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition font-semibold"
-              >
-                Send Request
-              </button>
+              <div className="text-center">
+                <Button className="" type="submit" disabled={isSubmitting}>
+                  Send Request
+                </Button>
+              </div>
             </Form>
           )}
         </Formik>

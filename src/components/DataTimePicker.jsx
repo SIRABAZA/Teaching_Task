@@ -11,9 +11,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export function Calendar24() {
+export function Calendar24({ date, time, onDateChange, onTimeChange }) {
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState(undefined);
 
   return (
     <div className="flex gap-4">
@@ -38,7 +37,11 @@ export function Calendar24() {
               selected={date}
               captionLayout="dropdown"
               onSelect={(selectedDate) => {
-                setDate(selectedDate);
+                if (selectedDate instanceof Date && !isNaN(selectedDate)) {
+                  onDateChange(selectedDate);
+                } else {
+                  onDateChange(null);
+                }
                 setOpen(false);
               }}
             />
@@ -53,7 +56,8 @@ export function Calendar24() {
           type="time"
           id="time-picker"
           step="1"
-          defaultValue="10:30:00"
+          value={time || ""}
+          onChange={(e) => onTimeChange && onTimeChange(e.target.value)}
           className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
         />
       </div>
