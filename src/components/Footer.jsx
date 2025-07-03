@@ -1,4 +1,14 @@
 import { useState } from "react";
+import {
+  Youtube,
+  Facebook,
+  Instagram,
+  CreditCard,
+  Wallet,
+  Banknote,
+  Landmark,
+  MessageCircle,
+} from "lucide-react";
 
 const year = new Date().getFullYear();
 
@@ -28,7 +38,7 @@ export default function Footer() {
           {/* Logo */}
           <div className="w-48 mb-8">
             <img
-              src="https://placehold.co/200x80/2563eb/white?text=ChildSkills"
+              src="https://cdn.niceonesa.com/web/assets/images/rtl_logo.svg?v=2.0.18(2)%202x"
               alt="ChildSkills Logo"
               className="w-full"
             />
@@ -40,45 +50,37 @@ export default function Footer() {
               href={socialLinks.youtube}
               target="_blank"
               rel="noopener noreferrer"
+              className="text-red-600 hover:text-red-800 text-3xl transition-colors"
+              aria-label="YouTube"
             >
-              <img
-                src="https://placehold.co/40/ff0000/white?text=YT"
-                alt="YouTube"
-                className="w-10 h-10 rounded-full"
-              />
+              <Youtube size={32} />
             </a>
             <a
               href={socialLinks.facebook}
               target="_blank"
               rel="noopener noreferrer"
+              className="text-blue-700 hover:text-blue-900 text-3xl transition-colors"
+              aria-label="Facebook"
             >
-              <img
-                src="https://placehold.co/40/1877f2/white?text=FB"
-                alt="Facebook"
-                className="w-10 h-10 rounded-full"
-              />
+              <Facebook size={32} />
             </a>
             <a
               href={socialLinks.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
+              className="text-green-500 hover:text-green-700 text-3xl transition-colors"
+              aria-label="WhatsApp"
             >
-              <img
-                src="https://placehold.co/40/25d366/white?text=WA"
-                alt="WhatsApp"
-                className="w-10 h-10 rounded-full"
-              />
+              <MessageCircle size={32} />
             </a>
             <a
               href={socialLinks.instagram}
               target="_blank"
               rel="noopener noreferrer"
+              className="text-pink-500 hover:text-pink-700 text-3xl transition-colors"
+              aria-label="Instagram"
             >
-              <img
-                src="https://placehold.co/40/e1306c/white?text=IG"
-                alt="Instagram"
-                className="w-10 h-10 rounded-full"
-              />
+              <Instagram size={32} />
             </a>
           </div>
 
@@ -101,11 +103,22 @@ export default function Footer() {
             &copy; {year} ChildSkills. All rights reserved.
           </p>
 
-          <div className="w-64">
-            <img
-              src="https://placehold.co/300x60/fff/333?text=Payment+Methods"
-              alt="Accepted payment methods"
-              className="w-full"
+          <div className="flex gap-4 text-3xl text-gray-500">
+            <CreditCard
+              className="hover:text-blue-700 transition-colors"
+              size={32}
+            />
+            <Wallet
+              className="hover:text-red-600 transition-colors"
+              size={32}
+            />
+            <Banknote
+              className="hover:text-blue-500 transition-colors"
+              size={32}
+            />
+            <Landmark
+              className="hover:text-blue-400 transition-colors"
+              size={32}
             />
           </div>
         </div>

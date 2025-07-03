@@ -13,6 +13,7 @@ import {
   fetchTeachers,
   bookLessonThunk,
 } from "@/features/teachers/teachersSlice";
+import Spinner from "@/components/Spinner";
 
 function formatTimeTo12Hour(timeStr) {
   const [hour, minute, second] = timeStr.split(":");
@@ -183,9 +184,7 @@ export default function Teacher() {
         </div>
         {/* Teacher Cards Grid */}
         {loading ? (
-          <div className="text-center py-12 text-blue-600 font-semibold">
-            Loading teachers...
-          </div>
+          <Spinner />
         ) : error ? (
           <div className="text-center py-12 text-red-500 font-semibold">
             {error}
