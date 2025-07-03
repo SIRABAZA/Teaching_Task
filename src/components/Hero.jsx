@@ -1,3 +1,7 @@
+import React from "react";
+import appStore from "../assets/app-store.svg";
+import playStore from "../assets/play-store.svg";
+
 export default function Hero() {
   return (
     <section className="py-12 px-4 md:py-20 bg-gray-50">
@@ -34,9 +38,9 @@ export default function Hero() {
                 className="hover:opacity-90 transition-opacity"
               >
                 <img
-                  src="https://placehold.co/150x50/3b82f6/white?text=App+Store"
+                  src={appStore}
                   alt="Download on the App Store"
-                  className="h-12"
+                  width={150}
                 />
               </a>
               <a
@@ -45,11 +49,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="hover:opacity-90 transition-opacity"
               >
-                <img
-                  src="https://placehold.co/150x50/34d399/white?text=Google+Play"
-                  alt="Get it on Google Play"
-                  className="h-12"
-                />
+                <img src={playStore} alt="Get it on Google Play" width={150} />
               </a>
             </div>
           </div>
@@ -58,7 +58,7 @@ export default function Hero() {
         {/* Hero image - placeholder from placeholder.com */}
         <div className="order-1 md:order-2">
           <img
-            src="https://placehold.co/600x400/2563eb/white?text=Happy+Kids+Learning"
+            src="https://images.pexels.com/photos/4143791/pexels-photo-4143791.jpeg"
             alt="Children enjoying educational activities"
             className="w-full max-w-md mx-auto md:max-w-none rounded-lg shadow-xl"
           />
