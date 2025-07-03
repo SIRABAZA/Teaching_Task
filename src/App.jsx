@@ -1,31 +1,43 @@
-import { useState } from "react";
-import Modal from "./components/Modal";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import Footer from "./components/Footer";
-// import TeacherPage from "./components/TeacherPage";
-import TeacherCard from "./components/TeacherCard";
-function App() {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <>
-      <Header />
-      <Hero />
-      <div className="mx-auto text-center py-5">
-        {" "}
-        <button
-          className="px-6 py-3 bg-blue-400 cursor-pointer hover:bg-blue-600 duration-300"
-          onClick={setIsOpen}
-        >
-          Toggle Modal
-        </button>
-      </div>
+import { Suspense, lazy } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Spinner from "./components/Spinner";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import Home from "./pages/Home";
+import Teacher from "./pages/Teacher";
 
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
-      <TeacherCard />
-      {/* <TeacherPage /> */}
-      <Footer />
-    </>
+// Lazy load the pages
+const RootLayout = lazy(() => import("./Layout/MainLayout"));
+// Also need to add this ristrictted route to the otp route
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "/teacher",
+        element: <Teacher />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+    ],
+  },
+]);
+
+export default function App() {
+  return (
+    <Suspense fallback={<Spinner />}>
+      <RouterProvider router={router} />
+    </Suspense>
   );
 }
-export default App;
